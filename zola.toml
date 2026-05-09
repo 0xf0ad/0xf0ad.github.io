@@ -1,0 +1,29 @@
+# The URL the site will be built for
+base_url = "https://example.com"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+theme = "terminus"
+
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = true, paginate_by = 5 },
+]
+
+[markdown]
+render_emoji = true
+bottom_footnotes = true
+
+[markdown.highlighting]
+style = "inline"
+theme = "monokai"
+
+
+[extra]
+# Put all your custom variables here
+title = "My portfolio"
+stylesheets = ["terminal-header.css"]

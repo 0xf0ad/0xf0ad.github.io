@@ -1,0 +1,16 @@
+<div class="term-nav">
+    <div class="term-prompt-line">
+        <span class="term-ps1">
+            <span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
+                class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span>
+        </span>
+        <span class="term-cmd"> ls</span>
+    </div>
+    <div class="term-ls-output">
+        <a href="{{ get_url(path='/') | safe }}" class="term-entry term-entry--current">./</a>
+        <a href="{{ get_url(path='/portfolio/') | safe }}" class="term-entry term-entry--dir">Projects/</a>
+        <a href="{{ get_url(path='/blog/') | safe }}" class="term-entry term-entry--dir">blogs/</a>
+        <a href="{{ get_url(path='/resume/') | safe }}" class="term-entry term-entry--file">resume</a>
+        <a href="{{ get_url(path='/contact/') | safe }}" class="term-entry term-entry--file">contact</a>
+    </div>
+</div>

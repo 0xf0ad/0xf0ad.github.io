@@ -1,0 +1,22 @@
+<div class="sb-inner">
+    <span class="sb-left">
+        <span class="sb-sep"> · </span>
+        <span class="sb-path">~/</span>
+    </span>
+    <span class="sb-center">built with <a href="https://www.getzola.org" target="_blank" rel="noopener noreferrer">zola</a></span>
+    <span class="sb-right">
+        <span class="sb-clock" id="sb-clock"></span>
+    </span>
+</div>
+<script>
+    (function () {
+        var el = document.getElementById('sb-clock');
+        if (!el) return;
+        function tick() {
+            var now = new Date();
+            el.textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        }
+        tick();
+        setInterval(tick, 30000);
+    })();
+</script>
