@@ -52,54 +52,10 @@ body.term-os {
 
 .term-app-window {
     width: 100%;
-    background: var(--t-bg);
-    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow:
-        0 0 0 1px var(--t-border),
-        0 4px 6px -1px rgba(0,0,0,0.4),
-        0 24px 80px rgba(0,0,0,0.65),
-        0 0 80px rgba(255,168,106,0.04);
     display: flex;
     flex-direction: column;
 }
-
-/* ─── Title bar ─── */
-.term-titlebar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    background: var(--t-raised);
-    border-bottom: 1px solid var(--t-border);
-    user-select: none;
-    flex-shrink: 0;
-}
-
-.term-dots { display: flex; align-items: center; gap: 7px; }
-
-.term-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: filter 0.15s;
-
-    &:hover { filter: brightness(1.25); }
-    &--close    { background: #ff5f57; box-shadow: 0 0 0 1px #bf4941; }
-    &--minimize { background: #febc2e; box-shadow: 0 0 0 1px #cf9920; }
-    &--maximize { background: #28c840; box-shadow: 0 0 0 1px #1d9b31; }
-}
-
-.term-title-text {
-    flex: 1;
-    text-align: center;
-    font-size: 0.72rem;
-    color: var(--t-dim);
-    letter-spacing: 0.03em;
-}
-
-.term-title-spacer { width: 52px; }
 
 /* ─── Scrollable terminal body ─── */
 .term-scroll {
@@ -112,20 +68,19 @@ body.term-os {
 /* ─── Nav / ls header ─── */
 .term-nav {
     padding: 14px 20px 10px;
-    border-bottom: 1px solid var(--t-border);
+    border-bottom: 3px solid var(--t-border);
     background: var(--t-surface);
 }
 
 /* ─── Session / main content ─── */
 .term-main { flex: 1; }
-.term-session { padding: 0 20px 24px; }
 
 /* ─── Prompt line (shared) ─── */
 .term-prompt-line {
     display: flex;
     align-items: baseline;
     flex-wrap: nowrap;
-    padding-top: 16px;
+    padding-top: 10px;
     white-space: nowrap;
     overflow-x: auto;
     font-size: 0.9rem;
@@ -162,6 +117,7 @@ body.term-os {
 }
 
 /* ─── Blinking cursor ─── */
+// idk if I would make a prompt at the footer
 .term-cursor {
     display: inline-block;
     width: 8px;
@@ -221,6 +177,27 @@ body.term-os {
     line-height: 1.7;
 }
 
+.term-neofetch {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 0 8px 20px;
+}
+
+.neofetch-image img {
+    max-width: 160px;
+    height: auto;
+    border-radius: 6px;
+    border: 2px solid var(--t-border);
+}
+
+.term-neo-output {
+    display: block;
+    color: var(--t-text);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
 /* ─── ASCII art banner ─── */
 .term-banner {
     padding: 24px 0 8px;
@@ -232,7 +209,6 @@ body.term-os {
     line-height: 1.2;
     color: var(--t-accent);
     white-space: pre;
-    text-shadow: 0 0 18px rgba(255,168,106,0.45);
     font-family: var(--font-mono);
 }
 
@@ -338,17 +314,6 @@ body.term-os {
         padding: 1px 6px;
         font-size: 0.9em;
         color: var(--t-accent);
-    }
-
-    pre {
-        background: #0a0a0a;
-        border: 1px solid var(--t-border);
-        border-radius: 6px;
-        padding: 14px 16px;
-        overflow-x: auto;
-        margin: 1em 0;
-
-        code { background: none; padding: 0; color: var(--t-text); font-size: 0.88rem; }
     }
 
     hr {
