@@ -35,9 +35,9 @@ html, body {
 /* ─── Desktop BG (subtle radial glow) ─── */
 body.term-os {
     min-height: 100vh;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,168,106,0.06) 0%, transparent 70%),
-        #0b0b10;
+    //background:
+    //    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,168,106,0.06) 0%, transparent 70%),
+    //    #0b0b10;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -70,7 +70,7 @@ body.term-os {
 .term-nav {
     padding: 14px 20px 10px;
     border-bottom: 3px solid var(--t-border);
-    background: var(--t-surface);
+    //background: var(--t-surface);
 }
 
 /* ─── Session / main content ─── */
@@ -364,13 +364,6 @@ body.term-os {
 
 /* ─── Override theme header/footer/body defaults ─── */
 .header, .footer, .main-menu, .logo { display: none !important; }
-
-body.term-os {
-    background: unset;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,168,106,0.06) 0%, transparent 70%),
-        #0b0b10;
-}
 
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
