@@ -35,9 +35,6 @@ html, body {
 /* ─── Desktop BG (subtle radial glow) ─── */
 body.term-os {
     min-height: 100vh;
-    //background:
-    //    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,168,106,0.06) 0%, transparent 70%),
-    //    #0b0b10;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -47,7 +44,7 @@ body.term-os {
 /* ─── App Window ─── */
 .term-desktop {
     width: 100%;
-    max-width: 900px;
+    max-width: 750px;
 }
 
 .term-app-window {
@@ -336,7 +333,6 @@ body.term-os {
 
 /* ─── Statusbar footer ─── */
 .term-statusbar {
-    background: var(--t-raised);
     border-top: 1px solid var(--t-border);
     padding: 6px 16px;
     font-size: 0.75rem;
@@ -356,7 +352,7 @@ body.term-os {
     .sb-branch { color: var(--t-green); font-weight: 600; }
     .sb-sep    { color: var(--t-dim); }
     .sb-path   { color: var(--t-pink); }
-    .sb-clock  { color: var(--t-yellow); font-weight: 600; }
+    .sb-cl     { color: var(--t-yellow); font-weight: 600; }
 
     a { color: var(--t-dim); text-decoration: none;
         &:hover { color: var(--t-accent); } }
