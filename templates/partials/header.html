@@ -7,9 +7,14 @@
         <span class="term-cmd"> ls</span>
     </div>
     <div class="term-ls-output">
-        <a href="{{ get_url(path='/') | safe }}" class="term-entry term-entry--current">"$HOME"/</a>
-        <a href="{{ get_url(path='/projects/') | safe }}" class="term-entry term-entry--dir">projects/</a>
-        <a href="{{ get_url(path='/posts/') | safe }}" class="term-entry term-entry--dir">posts/</a>
-        <a href="{{ get_url(path='/short_cv/') | safe }}" class="term-entry term-entry--file">short_cv</a>
+        {% set path = current_path | default(value="") %}
+        <a href="{{ get_url(path='/') | safe }}" class="term-entry {% if path == '/' %}
+        term-entry--current{% else %}term-entry--dir{% endif %}">"$HOME"/</a>
+        <a href="{{ get_url(path='/projects/') | safe }}" class="term-entry {% if path is starting_with('/projects/') %}
+        term-entry--current{% else %}term-entry--dir{% endif %}">projects/</a>
+        <a href="{{ get_url(path='/posts/') | safe }}" class="term-entry {% if path is starting_with('/posts/') %}
+        term-entry--current{% else %}term-entry--dir{% endif %}">posts/</a>
+        <a href="{{ get_url(path='/short_cv/') | safe }}" class="term-entry {% if path is starting_with('/short_cv/') %}
+        term-entry--current{% else %}term-entry--file{% endif %}">short_cv</a>
     </div>
 </div>

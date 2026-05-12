@@ -178,13 +178,37 @@ body.term-os {
 .term-neofetch {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 32px;
     padding: 12px 0 8px 20px;
 }
 
+.vis-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.vis-counter {
+    display: inline-flex;
+    align-items: center;
+    
+    img {
+        max-width: 25px;
+        height: auto;
+    }
+}
+
+.vis-txt {
+    display: inline-block;
+    color: var(--t-text);
+    font-size: 20px;
+    line-height: 1.7;
+}
+
 .neofetch-image img {
-    max-width: 160px;
+    max-width: 260px;
     height: auto;
     border-radius: 6px;
     border: 2px solid var(--t-border);
@@ -345,9 +369,9 @@ body.term-os {
         gap: 8px;
     }
 
-    .sb-left   { display: flex; align-items: center; gap: 4px; }
+    .sb-left   { display: flex; align-items: left; gap: 4px; }
     .sb-center { flex: 1; text-align: center; }
-    .sb-right  { }
+    .sb-right  { align-items: right; }
 
     .sb-branch { color: var(--t-green); font-weight: 600; }
     .sb-sep    { color: var(--t-dim); }
