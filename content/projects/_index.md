@@ -5,6 +5,8 @@ description = "list of rare instances where my hyperfixation was actually produc
 template = "projects.html"
 +++
 
+Disclamer: no water was consumed by AI in the making of any of these projects
+
 # Projects
 
 ## this website ofc
@@ -37,17 +39,5 @@ Can I label this as a project?, anyway this repo is my solutions for
 [project-euler problems](https://projecteuler.net/archives).
 ![image](https://projecteuler.net/profile/0xf0ad.png)
 
-# open source contributions
-
-## assimp
-A c++ library to load various 3d file formats into a shared, in-memory 
-format, I corrected the build script to work properly with MinGW build 
-system for windows toolchain in Linux.
-
-## oogabooga
-A C 2D game engine focused on simplicity, where I added Linux support
-(just a build script and minor changes not that big of a deal).
-
-## dwlb
-A status bar for DWL windows manager for Wayland, I corrected the centering 
-calculation.
+## LoRa
+I've also made a LoRa receiver as part of my TIPE project
