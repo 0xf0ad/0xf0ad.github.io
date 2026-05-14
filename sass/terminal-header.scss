@@ -4,19 +4,21 @@
 
 /* ─── Design tokens ─── */
 :root {
-    --t-bg:      #0d0d0d;
-    --t-surface: #141414;
-    --t-raised:  #1c1c1c;
-    --t-border:  rgba(255, 255, 255, 0.07);
-    --t-text:    #e2e2e2;
-    --t-dim:     rgba(255, 255, 255, 0.38);
-    --t-accent:  #ffa86a;
-    --t-green:   #5af78e;
-    --t-blue:    #57c7ff;
-    --t-pink:    #ff6ac1;
-    --t-yellow:  #f3f99d;
-    --t-red:     #ff5c57;
-    --t-comment: #636363;
+    --t-bg:      #1d2021;
+    --t-surface: #282828;
+    --t-raised:  #3c3836;
+    --t-border:  #504945;
+    --t-text:    #ebdbb2;
+    --t-dim:     #a89984;
+    --t-accent:  #fe8019;
+    --t-green:   #b8bb26;
+    --t-blue:    #83a598;
+    --t-pink:    #d3869b;
+    --t-yellow:  #fabd2f;
+    --t-red:     #fb4934;
+    --t-aqua:    #8ec07c;
+    --t-orange:  #fe8019;
+    --t-comment: #928374;
     --radius:    10px;
     --font-mono: 'FiraCode', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Menlo', monospace;
 }
@@ -26,10 +28,33 @@
 
 html, body {
     height: 100%;
-    background: #111118;
+    background: var(--t-bg);
     font-family: var(--font-mono);
     color: var(--t-text);
     -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: #d65d0e;
+    color: #ebdbb2;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--t-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--t-raised);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--t-border);
 }
 
 /* ─── Desktop BG (subtle radial glow) ─── */
@@ -91,12 +116,12 @@ body.term-os {
     gap: 0;
 }
 
-.t-user   { color: var(--t-blue); }
-.t-at     { color: var(--t-dim); }
-.t-host   { color: var(--t-green); }
-.t-sep    { color: var(--t-dim); }
+.t-user   { color: var(--t-yellow); }
+.t-at     { color: var(--t-green); }
+.t-host   { color: var(--t-blue); }
+.t-sep    { color: var(--t-comment); }
 .t-path   { color: var(--t-pink); }
-.t-dollar { color: var(--t-dim); margin-left: 1px; }
+.t-dollar { color: var(--t-text); margin-left: 1px; }
 
 .t-dim     { color: var(--t-dim); }
 .t-green   { color: var(--t-green); }
@@ -104,6 +129,8 @@ body.term-os {
 .t-pink    { color: var(--t-pink); }
 .t-yellow  { color: var(--t-yellow); }
 .t-red     { color: var(--t-red); }
+.t-aqua    { color: var(--t-aqua); }
+.t-orange  { color: var(--t-orange); }
 .t-comment { color: var(--t-comment); }
 .t-accent  { color: var(--t-accent); }
 
@@ -157,12 +184,26 @@ body.term-os {
     &--dir {
         color: var(--t-blue);
         font-weight: 700;
-        &:hover { color: #8adcff; background: rgba(87,199,255,0.09); }
+        &:hover { color: #83a598; background: rgba(131, 165, 152, 0.15); }
     }
     &--file {
         color: var(--t-accent);
-        &:hover { color: #ffcb99; background: rgba(255,168,106,0.09); }
+        &:hover { color: #fe8019; background: rgba(254, 128, 25, 0.15); }
     }
+}
+
+.webring{
+	display: flex;
+	padding: 0;
+	gap: 0;
+	flex-wrap: wrap;
+
+	img{
+		width: 88px;
+		height: 33px;
+		margin-top: 5px;
+		margin-bottom: 3px;
+	}
 }
 
 /* ─── term-block (command + output group) ─── */
@@ -192,7 +233,7 @@ body.term-os {
 .vis-counter {
     display: inline-flex;
     align-items: center;
-    
+
     img {
         max-height: 25px;
         width: auto;
@@ -274,7 +315,7 @@ body.term-os {
     .ls-name  {
         color: var(--t-blue);
         a { color: var(--t-blue); text-decoration: none; font-weight: 600;
-            &:hover { color: #8adcff; text-decoration: underline; } }
+            &:hover { color: #83a598; text-decoration: underline; } }
     }
     .ls-title { color: var(--t-dim); white-space: normal; }
 }
@@ -327,7 +368,7 @@ body.term-os {
 
     p  { margin: 0.8em 0; }
     a  { color: var(--t-blue); text-decoration: none;
-         &:hover { text-decoration: underline; color: #8adcff; } }
+         &:hover { text-decoration: underline; color: #83a598; } }
     ul, ol { padding-left: 1.6em; margin: 0.6em 0; }
     li { margin: 0.3em 0; }
 
@@ -335,7 +376,7 @@ body.term-os {
         border-left: 3px solid var(--t-accent);
         padding: 6px 14px;
         margin: 1em 0;
-        background: rgba(255,168,106,0.05);
+        background: rgba(254, 128, 25, 0.05);
         color: var(--t-dim);
         border-radius: 0 4px 4px 0;
     }
@@ -361,7 +402,7 @@ body.term-os {
         font-size: 0.87rem;
 
         th, td { border: 1px solid var(--t-border); padding: 6px 12px; text-align: left; }
-        th { color: var(--t-accent); background: rgba(255,168,106,0.06); }
+        th { color: var(--t-accent); background: rgba(254, 128, 25, 0.06); }
     }
 }
 

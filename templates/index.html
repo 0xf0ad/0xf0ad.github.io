@@ -4,18 +4,51 @@
 
 {% block main %}
 <div class="term-session">
-		<div class="term-prompt-line">
-			<span class="term-ps1">
-				<span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
-					class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
-			</span>
-			<span class="term-cmd">whoami</span>
-		</div>
-		<div class="term-output">
-			<b>Hello!</b>, I'am <b>Hamza Fouad</b> I'm a 20 years old Computer-Science / Embedded Systems /
-			Computer-Engineering udergrad student at the National Institute of Posts and Telecommunications (INPT), Rabat.
-			Interested in low level programming and I love breaking perfectly working things and fixing broken things.
-		</div>
+	<div class="term-prompt-line">
+		<span class="term-ps1">
+			<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
+				class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
+		</span>
+		<span class="term-cmd">whoami</span>
 	</div>
+	<div class="term-output">
+		<b>Hello!</b>, I am <b>Hamza Fouad</b> I'm a 20 years old Computer-Science / Embedded Systems /
+		Computer-Engineering undergrad student at the National Institute of Posts and Telecommunications (INPT), Rabat.
+		Interested in low level programming and I love breaking perfectly working things and fixing broken things.
+	</div>
+	<div class="term-prompt-line">
+		<span class="term-ps1">
+			<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
+				class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
+		</span>
+		<span class="term-cmd">locate 88x31</span>
+	</div>
+	<div><span style="margin-right: 15px"></span></div>
+	<div class="webring">
+		<a href="https://hillhouse.neocities.org/journal/notes/palestine" target="_blank">
+			<img src="https://hillhouse.neocities.org/_images/blog/palestine/bufreepalestine.gif"></a>
+		<a href="https://awesome-morocco.dev/">
+			<img src="https://awesome-morocco.dev/_next/static/media/site-icon.0f6b22d5.svg" style="width:88px"></a>
+		<a href="https://hackaday.com/" target="_blank"><img src="https://hackaday.com/wp-content/themes/hackaday-2/img/logo.png"></a>
+		<a href="https://f4inx.github.io/" target="_blank"> 
+			<img src="https://f4inx.github.io/posts/how-not-to-do-oscillators/03-rc-phase-shift-oscillator-Lissajous.png"></a>
+		<a href="https://oragejuice.vodka/" target="_blank"><img src="{{ get_url(path="images/waloo.png") }}"></a>
+		<a href="https://iczelia.net/" target="_blank"><img src="https://iczelia.net/assets-1024x768/8831/me.png"></a>
+		<a href="https://olliveen.neocities.org/" target="_blank">
+			<img src="https://olliveen.neocities.org/img/button.gif"></a>
+		<a href="https://portfoliodelili.neocities.org/" target="_blank">
+			<img src="https://portfoliodelili.neocities.org/images/bouton88.png" width=88px></a>
+		<a href="https://yui.dev/" target="_blank"><img src="https://yui.dev/static/88x31/yuidev.png"></a>
+		<a href="https://lina.sh/" target="_blank"><img src="https://lina.sh/assets/88x31/lina.gif"></a>
+		<a href="https://we-are-jammin.xyz/" target="_blank"><img src="https://lina.sh/assets/88x31/jammin.webp"></a>
+		<a href="https://youtube.com/@f4micom" target="_blank"><img src="https://wolfyja.de/badges/weedmario.gif"></a>
+		<a href="https://notnite.com/" target="_blank"><img src="https://notnite.com/buttons/notnite.png"></a>
+		<a href="https://libdb.so/" target="_blank"><img src="https://libdb.so/_fs/pics/88x31/d14.gif"></a>
+		<a href="https://wiredcollective.neocities.org/">
+			<img src="https://wiredcollective.neocities.org/webringimages/wiredcollectivebutton.png"
+				alt="WIRED COLLECTIVE WEBRING"></a>
+		<a href="https://www.inpt.ac.ma/" target="_blank"><img src="https://www.inpt.ac.ma/sites/default/files/logo.png"></a>
+	</div>
+</div>
 </div>
 {% endblock %}

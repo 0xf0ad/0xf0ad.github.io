@@ -7,8 +7,8 @@
 	<div>
 		<div class="term-prompt-line">
 			<span class="term-ps1">
-				<span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
-					class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
+				<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
+					class="t-sep">:</span><span class="t-path">~ </span><span class="t-dollar"> $ </span>
 			</span><span class="term-cmd">neofetch</span>
 		</div>
 		<div class="term-neofetch">
@@ -18,7 +18,7 @@
 			<div class="term-neo-output">
 				     Hamza Fouad
 				<br>-------------------------------------------
-				<br><span class="t-accent">OS</span>: curriosity-x86_64
+				<br><span class="t-accent">OS</span>: curiosity-x86_64
 				<br><span class="t-accent">Host</span>: flesh'n'bones
 				<br><span class="t-accent">Uptime</span>: 20 years
 				<br><span class="t-accent">Timezone</span>: Agadir, Morocco
@@ -30,7 +30,7 @@
 
 		<div class="term-prompt-line">
 			<span class="term-ps1">
-				<span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
+				<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
 					class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
 			</span>
 			<span class="term-cmd">cat contact.sh</span>
@@ -40,13 +40,13 @@
 			<br>export <b>EMAIL</b>="<a href="mailto:FouadHamza@proton.me">FouadHamza@proton.me</a>"
 			<br>export <b>GITHUB</b>="<a href="https://github.com/0xf0ad">0xf0ad</a>"
 			<br>export <b>STEAM</b>="<a href="https://steamcommunity.com/id/0xf0ad/">fresh fish dish</a>"
-			<br>export <b>DISCORD</b>=@0xf0ad  #altough I dont use verry often
+			<br>export <b>DISCORD</b>=@0xf0ad  #although I don't use very often
 			<br>export <b>PROJECT_EULER</b>=2078784_nJ68uQHhuO9ULSZqsVoqri52isaxoRGH
 		</div>
 
 			<div class="term-prompt-line">
 			<span class="term-ps1">
-				<span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
+				<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
 					class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
 			</span>
 			<span class="term-cmd">lspci</span>
@@ -66,7 +66,7 @@
 			<br>OS : Slackware Linux
 			<br>Mem: 8 Gb
 			<br>
-			<br># My secondary secondary caomuter
+			<br># My secondary secondary computer
 			<br>CPU: intel Pentium 4
 			<br>GPU: intel SD
 			<br>Mem: 512 Mem
@@ -75,7 +75,7 @@
 	
 		<div class="term-prompt-line">
 			<span class="term-ps1">
-				<span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
+				<span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
 					class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $ </span>
 			</span>
 			<span class="term-cmd">gpg --export --armor "$EMAIL"</span>
@@ -102,9 +102,6 @@
 			<br> =7UzO
 			<br> -----END PGP PUBLIC KEY BLOCK-----
  		</div>
-		<div>
-			88x31
-		</div>
 	</div>
 </div>
 {% endblock %}

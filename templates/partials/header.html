@@ -14,7 +14,7 @@
 
     <div class="term-prompt-line">
         <span class="term-ps1">
-            <span class="t-user">heacker</span><span class="t-at">@</span><span class="t-host">MACHIINE</span><span
+            <span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span
                 class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span>
         </span>
         <span class="term-cmd"> ls</span>
@@ -22,16 +22,16 @@
     <div class="term-ls-output">
         {% set path = current_path | default(value="") %}
         <a href="{{ get_url(path='/') | safe }}" class="term-entry {% if path == '/' %}
-        term-entry--current{% else %}term-entry--dir{% endif %}">"$HOME"/</a>
+        term-entry--current{% else %}term-entry--file{% endif %}">"$HOME"</a>
         <a href="{{ get_url(path='/about_me/') | safe }}" class="term-entry {% if path is starting_with('/about_me/') %}
         term-entry--current{% else %}term-entry--file{% endif %}">about_me</a>
-        <a href="{{ get_url(path='/posts/') | safe }}" class="term-entry {% if path is starting_with('/posts/') %}
-        term-entry--current{% else %}term-entry--dir{% endif %}">posts/</a>
         <a href="{{ get_url(path='/projects/') | safe }}" class="term-entry {% if path is starting_with('/projects/') %}
         term-entry--current{% else %}term-entry--file{% endif %}">projects</a>
         <a href="{{ get_url(path='/short_cv/') | safe }}" class="term-entry {% if path is starting_with('/short_cv/') %}
         term-entry--current{% else %}term-entry--file{% endif %}">short_cv_en</a>
         <a href="{{ get_url(path='/short_cv_fr/') | safe }}" class="term-entry {% if path is starting_with('/short_cv_fr/') %}
         term-entry--current{% else %}term-entry--file{% endif %}">short_cv_fr</a>
+        <a href="{{ get_url(path='/posts/') | safe }}" class="term-entry {% if path is starting_with('/posts/') %}
+        term-entry--current{% else %}term-entry--dir{% endif %}">posts/</a>
     </div>
 </div>
