@@ -1,46 +1,46 @@
 {% extends "base.html" %}
 
-{% block title %}{{ page.title }} — 0xf0ad{% endblock %}
+{% block title %}{{ page.title }} | 0xf0ad{% endblock %}
 
 {% block main %}
 <div class="term-session">
 
-    <div class="term-block">
-        <div class="term-prompt-line">
-            <span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span></span>
-            <span class="term-cmd"> cat {{ page.slug }}.md</span>
-        </div>
-    </div>
+	<div class="term-block">
+		<div class="term-prompt-line">
+			<span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span></span>
+			<span class="term-cmd"> cat {{ page.slug }}.md</span>
+		</div>
+	</div>
 
-    <article class="term-output term-article">
-        <header class="term-article-header">
-            <h1 class="term-article-title">
-                <span class="t-comment"># </span>{{ page.title }}
-            </h1>
-            {% if page.date %}
-            <div class="term-article-meta">
-                <span class="t-dim">date:</span> <span class="t-yellow">{{ page.date | date(format="%Y-%m-%d") }}</span>
-                {% if page.reading_time %}
-                <span class="t-dim"> · read:</span> <span class="t-blue">~{{ page.reading_time }}min</span>
-                {% endif %}
-                {% if page.taxonomies.tags %}
-                <span class="t-dim"> · tags:</span>
-                {% for tag in page.taxonomies.tags %}
-                <span class="t-green">#{{ tag }}</span>
-                {% endfor %}
-                {% endif %}
-            </div>
-            {% endif %}
-        </header>
-        <div class="term-prose">
-            {{ page.content | safe }}
-        </div>
-    </article>
+	<article class="term-output term-article">
+		<header class="term-article-header">
+			<h1 class="term-article-title">
+				<span class="t-comment"># </span>{{ page.title }}
+			</h1>
+			{% if page.date %}
+			<div class="term-article-meta">
+				<span class="t-dim">date:</span> <span class="t-yellow">{{ page.date | date(format="%Y-%m-%d") }}</span>
+				{% if page.reading_time %}
+				<span class="t-dim"> · read:</span> <span class="t-blue">~{{ page.reading_time }}min</span>
+				{% endif %}
+				{% if page.taxonomies.tags %}
+				<span class="t-dim"> · tags:</span>
+				{% for tag in page.taxonomies.tags %}
+				<span class="t-green">#{{ tag }}</span>
+				{% endfor %}
+				{% endif %}
+			</div>
+			{% endif %}
+		</header>
+		<div class="term-prose">
+			{{ page.content | safe }}
+		</div>
+	</article>
 
-    <div class="term-prompt-line term-idle">
-        <span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span></span>
-        <span class="term-cursor"></span>
-    </div>
+	<div class="term-prompt-line term-idle">
+		<span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~</span><span class="t-dollar"> $</span></span>
+		<span class="term-cursor"></span>
+	</div>
 
 </div>
 {% endblock %}

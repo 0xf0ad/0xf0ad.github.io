@@ -1,35 +1,34 @@
 {% extends "base.html" %}
 
-{% block title %}{{ section.title }} — 0xf0ad{% endblock %}
+{% block title %}{{ section.title }} | 0xf0ad{% endblock %}
 
 {% block main %}
 <div class="term-session">
-
-    <div class="term-block">
-        <div class="term-prompt-line">
-            <span class="term-ps1"><span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span class="t-sep">:
+	<div class="term-block">
+		<div class="term-prompt-line">
+			<span class="term-ps1"><span class="t-user">{{ config.extra.user }}</span><span class="t-at">@</span><span class="t-host">{{ config.extra.host }}</span><span class="t-sep">:
 			</span><span class="t-path">~/{{ section.title | lower }}</span><span class="t-dollar"> $</span></span>
-            <span class="term-cmd"> ls -la</span>
-        </div>
-        <div class="term-output">
-            <div class="ls-total">total {{ section.pages | length }}</div>
-            <table class="ls-long">
-                <tr>
-                    <td class="ls-perm">drwxr-xr-x</td>
-                    <td class="ls-date">--</td>
-                    <td class="ls-name t-dim">.</td>
-                    <td class="ls-title t-dim"></td>
-                </tr>
-                {% for page in section.pages %}
-                <tr>
-                    <td class="ls-perm">-rw-r--r--</td>
-                    <td class="ls-date">{{ page.date | default(value=now()) | date(format="%b %d %Y") }}</td>
-                    <td class="ls-name"><a href="{{ page.permalink | safe }}">{{ page.slug }}.md</a></td>
-                    <td class="ls-title t-dim">→ {{ page.title }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
+			<span class="term-cmd"> ls -la</span>
+		</div>
+		<div class="term-output">
+			<div class="ls-total">total {{ section.pages | length }}</div>
+			<table class="ls-long">
+				<tr>
+					<td class="ls-perm">drwxr-xr-x</td>
+					<td class="ls-date">--</td>
+					<td class="ls-name t-dim">.</td>
+					<td class="ls-title t-dim"></td>
+				</tr>
+				{% for page in section.pages %}
+				<tr>
+					<td class="ls-perm">-rw-r--r--</td>
+					<td class="ls-date">{{ page.date | default(value=now()) | date(format="%b %d %Y") }}</td>
+					<td class="ls-name"><a href="{{ page.permalink | safe }}">{{ page.slug }}.md</a></td>
+					<td class="ls-title t-dim">→ {{ page.title }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock %}

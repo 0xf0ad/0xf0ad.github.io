@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}{{ taxonomy.name | capitalize }} — 0xf0ad{% endblock %}
+{% block title %}{{ taxonomy.name | capitalize }} | 0xf0ad{% endblock %}
 
 {% block main %}
 <div class="term-session">
-    <div class="term-block">
-        <div class="term-prompt-line">
-            <span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~/{{ taxonomy.name }}</span><span class="t-dollar"> $</span></span>
-            <span class="term-cmd"> ls</span>
-        </div>
-        <div class="term-output">
-            <div class="term-ls-output">
-                {% for term in terms %}
-                <a href="{{ term.permalink | safe }}" class="term-entry term-entry--dir">{{ term.name }}/</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="term-prompt-line term-idle">
-        <span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~/{{ taxonomy.name }}</span><span class="t-dollar"> $</span></span>
-        <span class="term-cursor"></span>
-    </div>
+	<div class="term-block">
+		<div class="term-prompt-line">
+			<span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~/{{ taxonomy.name }}</span><span class="t-dollar"> $</span></span>
+			<span class="term-cmd"> ls</span>
+		</div>
+		<div class="term-output">
+			<div class="term-ls-output">
+				{% for term in terms %}
+				<a href="{{ term.permalink | safe }}" class="term-entry term-entry--dir">{{ term.name }}/</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="term-prompt-line term-idle">
+		<span class="term-ps1"><span class="t-user">0xf0ad</span><span class="t-at">@</span><span class="t-host">github</span><span class="t-sep">:</span><span class="t-path">~/{{ taxonomy.name }}</span><span class="t-dollar"> $</span></span>
+		<span class="term-cursor"></span>
+	</div>
 </div>
 {% endblock %}
