@@ -25,7 +25,7 @@ theme = "monokai"
 
 [extra]
 # Put all your custom variables here
-user = "heacker"
-host = "MACHIINE"
-title = "My portfolio"
+user = "anon"
+host = "cyberrealm"
+title = "this is the projection of my soul into a browser"
 stylesheets = ["terminal-header.css"]
