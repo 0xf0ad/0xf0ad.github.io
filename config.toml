@@ -27,5 +27,6 @@ theme = "monokai"
 # Put all your custom variables here
 user = "anon"
 host = "cyberrealm"
+PS1 = "" #TODO
 title = "this is the projection of my soul into a browser"
 stylesheets = ["terminal-header.css"]
