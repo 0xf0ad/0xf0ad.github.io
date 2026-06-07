@@ -87,23 +87,6 @@ packages on my limited bandwidth. At that point I would rather pick a distro
 with more robust package management, which is how I ended up on Void Linux
 who is infinitly more usable.
 
-
-There is a popular slang phrase in Morocco that goes "سلاك أ جمي" (Sslak a jmmi),
-it means "I'll just need to get throu this", and it suprinsenly sums up my
-experience with Sslak-ware, I understand that the choice of not including
-a package manager is intentional to retain simplicity, but I dont get it,
-a package amanger could be writen in a 100 lines of C, and it makes it
-implicitly more bloated, as there is no official way to install packages
-once the OS is installed the user might as well (and is recommended) to
-install every package on the ISO, but it still don't cut it, an other
-common argument is it's great for learning and getting your hands dirty
-which I guess could be true if the comparisson is done against windows or
-a user friendly distro, which the hole point for their existing is to
-eliminate that problem, but if you compare with other just works distros
-you will eventually be forced to get your hands dirty and learn sometimes,
-not everytime wich makes them better for learning and worst for repeatetive
-manual labour.
-
 There is a popular slang phrase in Morocco that goes “سلاك أجمي” (Sslak a
 jmmi), which means “I will just need to get through this,” and it
 surprisingly sums up my experience with Slackware. I understand that not
