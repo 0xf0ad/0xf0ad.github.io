@@ -5,7 +5,7 @@ date = 2026-05-28
 draft = false
 
 [taxonomies]
-tags = ['Linux', 'IT']
+tags = ['Linux', 'IT', 'opinion']
 
 +++
 

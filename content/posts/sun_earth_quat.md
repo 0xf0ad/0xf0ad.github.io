@@ -1,0 +1,117 @@
++++
+title = "estimating earth motion with quaternions"
+description = "the objective of this article is not to model the exact motion of earth but only to get close enough to calculate sun's radiation exposure"
+date = 2026-06-08
+
+[taxonomies]
+tags = ['science', 'physics', 'modeling']
+
++++
+
+This blog is part 1 of me making a very useless device
+which is a temperature-based clock, telling time by
+observing the temperature variation over time, and even
+to a worse accuracy, if specified the latitude, the time
+of the year. But first I need to model the primary
+variable source of heat, sun radiation, and that's by
+first modeling the earth's rotation around its axis and
+revolution around the sun.
+
+Although the earth's revolution around the sun is set on a
+plane, the earth's rotation around its axis is rather a
+very 3D one, and while I can model this motion using
+linear algebra, that would involve constructing for
+every motion 3 4x4 matrices for rotation around every
+axis of the 3D space. A much simpler approach is to use
+Hamiltonian Quaternions.
+
+First we should note that the binary operation
+.:H×H->H is not commutative, i.e., the order of applying
+rotations matters.
+
+To calculate the sun radiation, we should construct two
+vectors: one from the sun's center to a point p on the
+earth's surface, which we compute solar radiation for, and
+another vector, the earth's surface normal at point p.
+We will consider the variation in longitude very small
+and we will take the point p of longitude 0. To find
+the point p, we should rotate a unit vector in the y
+axis by the latitude angle. Only instead of it being
+from -90° to 90° with 0° on the equator,
+it's now from 0° to 180° with 0° being on the
+north pole. For that, we can utilize the following
+quaternion: q4 = cos(lat/2) + 0i + sin(lat/2)j + 0k
+
+The first motion we should take note of is the earth's
+rotation around its axis, which has a constant angular
+velocity (if we neglect the effect of the moon's tidal
+friction, which slows it down and stretches the earth's
+day by about 1.7 milliseconds every century). We can apply
+the following quaternion after choosing the convention
+of the z-axis as aligned to the local earth's axis.
+The time variable is set in terms of days with the 'oneday'
+variable to tell how many samples we take per day.
+The angle of the earth at a given hour is given by
+the following equation:
+h = ((frame % oneday) / oneday) * 2*pi
+and the quaternion for this first rotation is
+q1 = cos(h/2) + 0i + 0j + sin(h/2)k
+
+Then we also need to consider the earth's tilt by 23.44°
+in the y-axis. The tilt is constant no matter the
+earth's position around the sun, and it is in world
+coordinates rather than the earth's, so it should be the
+last to apply. The tilt in reality does vary by a
+very negligible amount; for example, it will take 10,000
+years to decrease by 1°. The simulation runs over the
+span of 1 year, so we consider it constant. We apply
+the following quaternion:
+'q3 = cos(tilt/2) + 0i + sin(tilt/2)j + 0k'
+
+Now for the earth's revolution around the sun, we displace
+the earth by vector R, which we can approximate by a
+simple uniform rotation, but we won't disappoint Kepler,
+who demonstrated that planetary movements are elliptic.
+We first consider an initial linear theta by time:
+'theta = (frame*2*pi)/(365.2*oneday)', then
+we try to solve Kepler's equation 'E − e*sin(E) = theta'.
+5 Newton iterations are probably enough:
+'for _ in range(5):
+    E -= (E - e*sin(E) - theta)/(1 - e*cos(E))'
+'theta = 2*atan2(sqrt(1+e)*sin(E/2), sqrt(1-e)*cos(E/2))'
+The radius from the sun to the earth is
+'r = D*(1 - e*cos(E))' which is a scalar. The vector R is
+the vector v1 (the initial position of the earth
+normalized) rotated by the quaternion
+'q1 = cos(theta/2) + 0i + 0j + sin(theta/2)k'.
+Then the earth is displaced by that vector R.
+
+The amount of radiation is easily inferred by calculating
+the dot product between the vector R and the normal
+surface vector at the point p, which is the vector
+from the earth's core to p, the vector (R - p). By
+neglecting the earth's diameter in comparison to the
+distance between earth and sun, we can consider the
+sun's rays as parallel. The only thing left is to
+prevent the result of the dot product from becoming negative,
+meaning the surface normal is facing the other side.
+It doesn't matter which face is the front since it's
+just a 180° phase longitude shift we already
+consider unimportant as long as it's consistent.
+If the result is negative, it will be set to 0.
+
+Note: the synodic day or solar day is slightly longer
+than 24 hours. That's why there is a slight shift
+in where the day starts and ends on the data. The earth
+has 365 solar days; 1 solar day is added since the
+earth has rotated around the sun. That leaves the earth with
+364 rotations around its axis. To correct that effect,
+simply use i_solar = i - i/365.2 = i*0.9972. This is yet
+another approximation; the length of the day varies
+throughout the year.
+
+
+<video controls width="100%" style="border-radius: 6px;">
+  <source src="/sun/movie.mp4" type="video/mp4">
+</video>
+
