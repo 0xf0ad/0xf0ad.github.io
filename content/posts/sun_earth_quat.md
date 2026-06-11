@@ -115,3 +115,157 @@ throughout the year.
   <source src="/sun/movie.mp4" type="video/mp4">
 </video>
 
+python code for the computation and animation on blender
+
+TODO: rewrite in haskell
+
+
+```python
+
+import bpy
+from mathutils import Quaternion, Vector
+from math import radians, sin, cos, pi, sqrt, tan, atan2
+
+tip = bpy.data.objects.new("VectorTip", None)
+bpy.context.collection.objects.link(tip)
+
+# Original vector
+D = 5
+d = 1
+v1 = Vector((1, 0, 0))
+v2 = Vector((0, 0, 1))
+
+# Store trajectory points
+points = []
+datt = []
+
+obj = bpy.context.active_object
+obj.rotation_mode = 'QUATERNION'
+
+for frame in range(36525):
+
+    # every 100 frame is one day
+    oneday = 100
+    theta = (frame*2*pi)/(365.2*oneday)
+    M = theta
+    e = 0.0167
+    E = M
+    for _ in range(5):
+        E -= (E - e*sin(E) - M)/(1 - e*cos(E))
+
+    theta = 2*atan2(
+        sqrt(1+e)*sin(E/2),
+        sqrt(1-e)*cos(E/2)
+    )
+
+    r = D*(1 - e*cos(E))
+
+    hours = ((frame%oneday)/oneday)*2*pi
+    tilt = radians(23.44)
+
+    q1 = Quaternion((cos(theta/2), 0, 0, sin(theta/2)))
+    q2 = Quaternion((cos(hours/2), 0, 0, sin(hours/2)))
+    q3 = Quaternion((cos(tilt/2), 0, sin(tilt/2), 0))
+    R = r * q1 @ v1
+    solar_dir = -R.normalized()
+    dat = []
+
+    for i in range(181):
+        lat = radians(i)
+        q4 = Quaternion((cos(lat/2), 0, sin(lat/2), 0))
+        n =  q3 @ q2 @ q4 @ v2
+        p =  R + (d * n)
+        dat += [max(solar_dir.dot(n), 0)]
+    datt += [dat]
+    
+    lat = radians(90 - 33)
+    q4 = Quaternion((cos(lat/2), 0, sin(lat/2), 0))
+
+    obj.rotation_quaternion = q3 @ q2
+    obj.keyframe_insert(
+        data_path="rotation_quaternion",
+        frame=frame
+    )
+    obj.location = R
+    obj.keyframe_insert(
+        data_path="location",
+        frame=frame
+    )
+
+    points.append(p.copy())
+
+    tip.location = p
+
+    tip.keyframe_insert(
+        data_path="location",
+        frame=frame
+    )
+
+curve_data = bpy.data.curves.new(
+    "Trajectory",
+    type='CURVE'
+)
+
+curve_data.dimensions = '3D'
+
+spline = curve_data.splines.new('POLY')
+spline.points.add(len(points)-1)
+
+for i, p in enumerate(points):
+    spline.points[i].co = (p.x, p.y, p.z, 1)
+
+curve_obj = bpy.data.objects.new(
+    "Trajectory",
+    curve_data
+)
+
+bpy.context.collection.objects.link(curve_obj)
+
+
+with open("output.txt", "w") as file:
+    print(datt, file=file)
+
+
+```
+
+code for ploting computed data
+
+```python
+
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import ast
+
+def date(n):
+                m = [0, 30, 58, 89, 119, 150,
+                         180, 211, 242, 272, 303, 333, 365]
+                s = ['', 'January', 'Febrary', 'March', 'Abril',
+                         'May', 'June', 'July', 'August',
+                         'September', 'October', 'Novenber', 'December']
+                for i in range(1, len(m)):
+                                if n < m[i]: return str(n - m[i-1] + 1) + ' ' + s[i]
+
+
+with open("output.txt", "r") as file:
+        data = ast.literal_eval(file.read().strip())
+        file.close()
+
+fig, ax = plt.subplots()
+days = []
+for i in [int(i*100 + (i*100/365.2)) for i in range(363)]:
+                day = ax.imshow(list(zip(*data[i:i+101])),
+                        animated=True, extent=[0, 360, 90, -90], aspect='auto')
+                title = ax.text(0.5, 1.01, date(i//100),
+                                transform=ax.transAxes, ha='center', animated=True)
+                if i == 50: plt.colorbar(day, ax=ax)
+                plt.xlabel("longitude")
+                plt.ylabel("latitude")
+                days += [[day, title]]
+
+
+ani = animation.ArtistAnimation(fig, days, interval=50)
+ani.save("movie.mp4")
+
+```
+
+
