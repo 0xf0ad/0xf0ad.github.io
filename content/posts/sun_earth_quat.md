@@ -111,6 +111,9 @@ another approximation; the length of the day varies
 throughout the year.
 
 
+this is a daily snapshot of the solar radiation in
+exactly 12h00 UTC everyday of the year.
+
 <video controls width="100%" style="border-radius: 6px;">
   <source src="/sun/movie.mp4" type="video/mp4">
 </video>
