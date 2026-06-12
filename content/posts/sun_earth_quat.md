@@ -1,6 +1,6 @@
 +++
 title = "estimating earth motion with quaternions"
-description = "the objective of this article is not to model the exact motion of earth but only to get close enough to calculate sun's radiation exposure"
+description = "consider the penguin as a perfect circle"
 date = 2026-06-08
 
 [taxonomies]
@@ -114,6 +114,13 @@ throughout the year.
 <video controls width="100%" style="border-radius: 6px;">
   <source src="/sun/movie.mp4" type="video/mp4">
 </video>
+
+the anual average solar radiation:
+
+![Image](/sun/average.png)
+
+we can see that they are on the daily level just Bell curves
+with variying lambdas and mus
 
 python code for the computation and animation on blender
 
@@ -232,18 +239,20 @@ code for ploting computed data
 
 ```python
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import ast
 
 def date(n):
-                m = [0, 30, 58, 89, 119, 150,
-                         180, 211, 242, 272, 303, 333, 365]
-                s = ['', 'January', 'Febrary', 'March', 'Abril',
-                         'May', 'June', 'July', 'August',
-                         'September', 'October', 'Novenber', 'December']
-                for i in range(1, len(m)):
-                                if n < m[i]: return str(n - m[i-1] + 1) + ' ' + s[i]
+    m = [0, 30, 58, 89, 119, 150,
+         180, 211, 242, 272, 303, 333, 365]
+    s = ['', 'January', 'Febrary', 'March', 'Abril',
+         'May', 'June', 'July', 'August',
+         'September', 'October', 'Novenber', 'December']
+    for i in range(1, len(m)):
+        if n < m[i]: return str(n - m[i-1] + 1) + ' ' + s[i]
 
 
 with open("output.txt", "r") as file:
@@ -252,20 +261,36 @@ with open("output.txt", "r") as file:
 
 fig, ax = plt.subplots()
 days = []
+summ = [[0] * 101 for _ in range(181)]
 for i in [int(i*100 + (i*100/365.2)) for i in range(363)]:
-                day = ax.imshow(list(zip(*data[i:i+101])),
-                        animated=True, extent=[0, 360, 90, -90], aspect='auto')
-                title = ax.text(0.5, 1.01, date(i//100),
-                                transform=ax.transAxes, ha='center', animated=True)
-                if i == 50: plt.colorbar(day, ax=ax)
-                plt.xlabel("longitude")
-                plt.ylabel("latitude")
-                days += [[day, title]]
+        t = list(zip(*data[i:i+101]))
+        day = ax.imshow(t, animated=True,
+                extent=[0, 360, 90, -90], aspect='auto')
+        title = ax.text(0.5, 1.01, date(i//100),
+                transform=ax.transAxes, ha='center', animated=True)
+        if i == 50: plt.colorbar(day, ax=ax)
+        plt.xlabel("longitude")
+        plt.ylabel("latitude")
+        days += [[day, title]]
+        for j in range(len(t)):
+                for k in range(len(t[j])):
+                        summ[j][k] += t[j][k]/363
 
 
 ani = animation.ArtistAnimation(fig, days, interval=50)
 ani.save("movie.mp4")
+plt.close(fig)
+
+matplotlib.use("TkAgg")
+import importlib
+importlib.reload(plt)
+
+fig2, ax2 = plt.subplots()
+im = ax2.imshow(summ, extent=[0, 360, 90, -90], aspect='auto')
+plt.colorbar(im, ax=ax2)
+plt.xlabel("longitude")
+plt.ylabel("latitude")
+plt.title("average solar radiation")
+plt.show()
 
 ```
-
-
