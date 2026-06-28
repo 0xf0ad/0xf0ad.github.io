@@ -11,23 +11,27 @@
 			<span class="term-cmd"> ls -la</span>
 		</div>
 		<div class="term-output">
-				<div class="ls-total">total {{ section.pages | length }}</div>
-				<table class="ls-long">
-					<tr>
-						<td class="ls-perm">drwxr-xr-x</td>
-						<td class="ls-date">--</td>
-						<td class="ls-name t-dim">.</td>
-						<td class="ls-title t-dim"></td>
-					</tr>
-					{% for page in section.pages %}
-					<tr>
-						<td class="ls-perm">-rw-r--r--</td>
-						<td class="ls-date">{{ page.date | default(value=now()) | date(format="%b %d %Y") }}</td>
-						<td class="ls-name"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></td>
-						<td class="ls-title t-dim"> {{ page.description }}</td>
-					</tr>
-					{% endfor %}
-				</table>
+			<div class="ls-total">total {{ section.pages | length }}</div>
+			<div class="ls-long">
+				{% for page in section.pages %}
+				<div class="ls-entry">
+					{% if page.taxonomies.tags %}
+					<div class="ls-tags-line">
+						{% for tag in page.taxonomies.tags %}<span class="ls-tag">#{{ tag }}</span>{% endfor %}
+					</div>
+					{% endif %}
+					<div class="ls-row">
+						<span class="ls-perm t-comment">-rw-r--r--</span>
+						<span class="ls-size t-dim">{{ page.reading_time }} min</span>
+						<span class="ls-date t-yellow">{{ page.date | default(value=now()) | date(format="%b %d %Y") }}</span>
+						<span class="ls-name"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></span>
+					</div>
+					{% if page.description %}
+					<div class="ls-desc-line t-dim">{{ page.description }}</div>
+					{% endif %}
+				</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 </div>
