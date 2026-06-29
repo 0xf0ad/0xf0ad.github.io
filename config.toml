@@ -24,7 +24,7 @@ theme = "monokai"
 
 
 [extra]
-# Put all your custom variables here
+katex_enable = true
 user = "anon"
 host = "cyberrealm"
 PS1 = "" #TODO

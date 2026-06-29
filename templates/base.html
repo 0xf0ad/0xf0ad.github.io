@@ -13,6 +13,31 @@
     <link rel="stylesheet" href="{{ get_url(path='css/style.css', cachebust=true) }}">
     <link rel="stylesheet" href="{{ get_url(path='terminal-header.css', cachebust=true) }}">
 </head>
+
+    {% block js %}
+        {% if config.extra.katex_enable %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css"
+            integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"
+            integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/mathtex-script-type.min.js"
+            integrity="sha384-W8gaN87yMtPe/iAcxlyIDA8OVOzZvVD4c/HEE6QHhIyo8yHnVSXLzzy+eNWwpivm" crossorigin="anonymous"></script>
+            {% if config.extra.katex_auto_render %}
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js"
+            integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+            {% endif %}
+        {% endif %}
+    {% endblock js %}
+
+    {% block css %}
+        {% if config.extra.katex_enable %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" 
+            integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        {% endif %}
+    {% endblock css %}
+
 <body class="term-os" data-theme="terminus">
     <div class="term-desktop">
         <div class="term-app-window">

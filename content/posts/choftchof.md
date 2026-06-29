@@ -24,7 +24,7 @@ the fittest option?
 
 The thing about timezones is that they are often whole number
 additions and subtractions, so every whole number shift of
-longitude is 360/24 = 15° wide, with the Greenwich line
+longitude is {{ katex(body="360/24 = 15°") }} wide, with the Greenwich line
 in the middle, meaning GMT+0 is spanning from longitude lines
 7.5°E and -7.5°W, and GMT-1 from -7.5°W to -22.5°W.
 

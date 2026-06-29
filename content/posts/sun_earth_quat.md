@@ -26,8 +26,8 @@ axis of the 3D space. A much simpler approach is to use
 Hamiltonian Quaternions.
 
 First we should note that the binary operation
-.:H×H->H is not commutative, i.e., the order of applying
-rotations matters.
+{{ katex(body="\cdot\ : H×H\rightarrow H") }} is not
+commutative, i.e. the order of applying rotations matters.
 
 To calculate the sun radiation, we should construct two
 vectors: one from the sun's center to a point p on the
@@ -40,7 +40,7 @@ axis by the latitude angle. Only instead of it being
 from -90° to 90° with 0° on the equator,
 it's now from 0° to 180° with 0° being on the
 north pole. For that, we can utilize the following
-quaternion: q4 = cos(lat/2) + 0i + sin(lat/2)j + 0k
+quaternion: {{ katex(body="q4 = \cos(lat/2) + 0i + \sin(lat/2)j + 0k") }}
 
 The first motion we should take note of is the earth's
 rotation around its axis, which has a constant angular
@@ -53,9 +53,9 @@ The time variable is set in terms of days with the 'oneday'
 variable to tell how many samples we take per day.
 The angle of the earth at a given hour is given by
 the following equation:
-h = ((frame % oneday) / oneday) * 2*pi
+{{ katex(body="h = ((frame\ \mod oneday) / oneday) * 2\pi") }}
 and the quaternion for this first rotation is
-q1 = cos(h/2) + 0i + 0j + sin(h/2)k
+{{ katex(body="q1 = \cos(h/2) + 0i + 0j + \sin(h/2)k") }}
 
 Then we also need to consider the earth's tilt by 23.44°
 in the y-axis. The tilt is constant no matter the
@@ -66,24 +66,27 @@ very negligible amount; for example, it will take 10,000
 years to decrease by 1°. The simulation runs over the
 span of 1 year, so we consider it constant. We apply
 the following quaternion:
-'q3 = cos(tilt/2) + 0i + sin(tilt/2)j + 0k'
+{{ katex(body="q3 = \cos(tilt/2) + 0i + \sin(tilt/2)j + 0k") }}
 
 Now for the earth's revolution around the sun, we displace
 the earth by vector R, which we can approximate by a
 simple uniform rotation, but we won't disappoint Kepler,
 who demonstrated that planetary movements are elliptic.
 We first consider an initial linear theta by time:
-'theta = (frame*2*pi)/(365.2*oneday)', then
-we try to solve Kepler's equation 'E − e*sin(E) = theta'.
+{{ katex(body="\theta = (frame*2\pi)/(365.2*oneday)") }}, then
+we try to solve Kepler's equation
+{{ katex(body="E − e\sin(E) = \theta") }}.
 5 Newton iterations are probably enough:
-'for _ in range(5):
-    E -= (E - e*sin(E) - theta)/(1 - e*cos(E))'
-'theta = 2*atan2(sqrt(1+e)*sin(E/2), sqrt(1-e)*cos(E/2))'
+```python
+for _ in range(5):
+    E -= (E - e*sin(E) - theta)/(1 - e*cos(E))
+theta = 2*atan2(sqrt(1+e)*sin(E/2), sqrt(1-e)*cos(E/2))
+```
 The radius from the sun to the earth is
-'r = D*(1 - e*cos(E))' which is a scalar. The vector R is
-the vector v1 (the initial position of the earth
-normalized) rotated by the quaternion
-'q1 = cos(theta/2) + 0i + 0j + sin(theta/2)k'.
+{{ katex(body="r = D*(1 - e\cos(E))") }}. which is a scalar.
+The vector R is the vector v1 (the initial position of
+the earth normalized) rotated by the quaternion
+{{ katex(body="q1 = \cos(\theta/2) + 0i + 0j + \sin(\theta/2)k") }}.
 Then the earth is displaced by that vector R.
 
 The amount of radiation is easily inferred by calculating
@@ -106,9 +109,9 @@ in where the day starts and ends on the data. The earth
 has 365 solar days; 1 solar day is added since the
 earth has rotated around the sun. That leaves the earth with
 364 rotations around its axis. To correct that effect,
-simply use i_solar = i - i/365.2 = i*0.9972. This is yet
-another approximation; the length of the day varies
-throughout the year.
+simply use {{ katex(body="i_{solar} = i-i/365.2 = 0.9972i") }}.
+This is yet another approximation; the length of the
+day varies throughout the year.
 
 
 this is a daily snapshot of the solar radiation in
@@ -131,7 +134,6 @@ TODO: rewrite in haskell
 
 
 ```python
-
 import bpy
 from mathutils import Quaternion, Vector
 from math import radians, sin, cos, pi, sqrt, tan, atan2
@@ -234,14 +236,11 @@ bpy.context.collection.objects.link(curve_obj)
 
 with open("output.txt", "w") as file:
     print(datt, file=file)
-
-
 ```
 
 code for ploting computed data
 
 ```python
-
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -295,5 +294,4 @@ plt.xlabel("longitude")
 plt.ylabel("latitude")
 plt.title("average solar radiation")
 plt.show()
-
 ```
