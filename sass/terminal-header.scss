@@ -285,7 +285,7 @@ body.term-os {
 
 /* ─── ASCII art banner ─── */
 .term-banner {
-    padding: 0 0 8px;
+    padding: 0 0 15px;
     overflow-x: auto;
     display: flex;
 }
@@ -299,7 +299,7 @@ body.term-os {
 }
 
 .banner-tifinagh {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: 8.5rem;
     line-height: 1;
     color: var(--t-blue);
     font-family: var(--font-mono);
