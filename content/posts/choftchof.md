@@ -1,6 +1,6 @@
 +++
 title = "what is the most fitting timezone for Morocco?"
-description = "A TECHNOCRATIC PRATIC"
+description = "A TECHNOCRATIC PRATICE"
 date = 2026-06-28
 
 [taxonomies]
