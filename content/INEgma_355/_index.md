@@ -1,0 +1,7 @@
++++
+title = "INEgma_355"
+template = "INEgma14.html"
++++
+Le trajet commencera depuis l’INPT et se terminera également à l’INPT.
+
+[rejoindre le groupe Wahtsapp de votre equipe](https://chat.whatsapp.com/FsZUykmHqua1w1SO4fixwr)
