@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map</title>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+        /* --- NEW STYLES FOR THE TEXT LABELS --- */
+        
+        /* 1. Remove the white triangle pointer */
+        .maplibregl-popup-tip {
+            display: none !important; 
+        }
+
+        /* 2. Remove the white box and style the text */
+        .maplibregl-popup-content {
+            background: transparent !important; 
+            box-shadow: none !important; 
+            padding: 0 !important;
+            
+            /* Match the font from your reference image */
+            font-family: "Times New Roman", Times, serif;
+            font-size: 18px;
+            color: #333333; /* Dark gray */
+            text-transform: uppercase; /* Forces all caps like AGDAL */
+            letter-spacing: 1px; /* Spaces the letters out slightly */
+            
+            /* Adds a slight halo around the letters so they are readable over map lines */
+            text-shadow: 
+                -1px -1px 0 rgba(255,255,255,0.7),  
+                 1px -1px 0 rgba(255,255,255,0.7),
+                -1px  1px 0 rgba(255,255,255,0.7),
+                 1px  1px 0 rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.js"></script>
+    <script>
+        // 1. Paste your MapTiler API key between the single quotes below
+        maptilersdk.config.apiKey = 'EOzHc8Lb2SeXDI6vtFIh';
+
+	maptilersdk.setRTLTextPlugin('https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js');
+       
+        // 2. Initialize the empty map
+        const map = new maptilersdk.Map({
+            container: 'map',
+            style: '019ff79f-ed9b-7b64-a31b-df9eedc404c4',
+            center: [-6.83671, 34.00672], // Starting position: [Longitude, Latitude]
+            zoom: 12.36,
+	    language: maptilersdk.Language.FRENCH	
+        });
+        const geolocate = new maptilersdk.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true 
+            },
+            trackUserLocation: true,     
+            showUserHeading: true        
+        });
+
+        map.addControl(geolocate);
+
+        map.on('load', () => {
+            geolocate.trigger();
+        });
+        // You can add your markers down here later!
+	// 1. A list of places using default pins with custom colors
+    	const standardPlaces = [
+        	{ name: "Tour Hassan", lng: -6.822972, lat: 34.022806, color: "#FF0000" },
+        	{ name: "Rabat Art Galley", lng: -6.833778, lat: 34.028472, color: "#80413D" },
+		{ name: "INPT", lng: -6.866667, lat: 33.979667, color: "#5C61F0" },
+		{ name: "Jardin Andalouse", lng: -6.835389, lat: 34.030028, color: "#07925E" },
+		{ name: "Marina", lng: -6.823833, lat: 34.029639, color: "#036396" }
+    	];
+	// 2. Loop through and create the pins and permanent labels
+    	standardPlaces.forEach(place => {
+        	// 1. Draw the default marker on the map
+        	new maptilersdk.Marker({ color: place.color }) 
+            		.setLngLat([place.lng, place.lat])
+            		.addTo(map); // Notice we removed the .setPopup() command
+
+	        // 2. Draw the text label directly onto the map permanently
+        	new maptilersdk.Popup({ 
+            		offset: 35, // Shifted slightly higher so it doesn't cover the top of the pin
+            		closeButton: false, 
+            		closeOnClick: false 
+        	})
+        	.setLngLat([place.lng, place.lat]) // Place it at the exact same GPS coordinates
+        	.setText(place.name)
+        	.addTo(map); // Attach it directly to the map canvas instead of the marker
+    	});
+        
+    </script>
+</body>
+</html>
